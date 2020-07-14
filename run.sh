@@ -33,7 +33,7 @@ cd ..
 mkdir -p $GIT_CLONE_DIR
 git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/joshlong/joshlong.github.io-content.git $GIT_CLONE_DIR
 cd $GIT_CLONE_DIR  
-cp $OUTPUT_JSON_FN $GIT_CLONE_DIR
+cp $OUTPUT_JSON_FN $GIT_CLONE_DIR/content/appearances.json
 ls -la $OUTPUT_JSON_FN
 git add *
 git commit -am "updated $FN @ $(date)"
