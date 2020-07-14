@@ -13,6 +13,7 @@ ls -la token.pickle
 
 output=$HOME/out
 export JSON_FN=$output/appearances.json
+echo "JSON_FN=$JSON_FN"
 rm -rf $output
 mkdir -p $output 
 
@@ -24,7 +25,6 @@ mkdir -p $output/clone
 git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/joshlong/joshlong.github.io-content.git $output/clone 
 cd $output/clone  
 cp $JSON_FN $output/clone
-ls -la 
 ls -la $JSON_FN
 git add *
 git commit -am "updated $FN @ $(date)"
