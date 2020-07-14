@@ -42,7 +42,8 @@ class Appearance(object):
         self.marketing_blurb = marketing_blurb
 
 
-def read_appearances_from_google_sheet(sheet, tab: str, tab_range: str):
+# sheet, tab_name, sheet_range, sheet_key
+def read_appearances_from_google_sheet(sheet:GSheet, tab: str, tab_range: str ):
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
 
@@ -91,10 +92,8 @@ def main(args):
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:
         client_config = json.load(json_file)
-
     sheet = GSheet(client_config,  pickled_token_fn, sheet_key)
-    appearances = read_appearances_from_google_sheet(
-        sheet, tab_name, sheet_range, sheet_key)
+    appearances = read_appearances_from_google_sheet(sheet, tab_name, sheet_range)
 
     def create_public_view(entry: typing.Dict) -> typing.Dict:
         public_keys = ['appearance', 'location', 'start_date', 'end_date', 'time', 'location_address', 'marketing_blurb']
