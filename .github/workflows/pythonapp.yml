@@ -10,7 +10,7 @@ env:
   GIT_URI:  ${{ secrets.GIT_URI }}
   GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
   CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON  }}
-  PICKLED_TOKEN: ${{ secrets.PICKLED_TOKEN  }}
+  PICKLED_TOKEN: ${{ secrets.PICKLED_TOKEN }}
 
 on:
   push:
