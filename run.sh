@@ -8,6 +8,9 @@ git config --global user.name "Appearances Bot"
 echo "$PICKLED_TOKEN" | base64 -d >token.pickle
 echo "$CREDENTIALS_JSON" >credentials.json
 
+ls -la credentials.json 
+ls -la token.pickle 
+
 output=$HOME/out
 JSON_FN=$output/appearances.json
 rm -rf $output

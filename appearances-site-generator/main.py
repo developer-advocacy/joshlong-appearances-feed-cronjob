@@ -87,7 +87,7 @@ def main(args):
 
     def production_values():
         return [os.environ[a] for a in
-                ['GS_TAB_NAME', 'GS_TAB_RANGE', 'GS_KEY', 'GOOGLE_CREDENTIALS_JSON', 'OUTPUT_JSON']]
+                ['GS_TAB_NAME', 'GS_TAB_RANGE', 'GS_KEY', 'GOOGLE_CREDENTIALS_JSON', 'JSON_FN']]
 
     tab_name, sheet_range, sheet_key, credentials_file, output_file_name = production_values()
     
