@@ -1,12 +1,16 @@
-name: Spring Tips Google Sheet Feed Processor
+name: Public Appearances Feed Processor
 
 env:
-  GIT_USERNAME	: ${{ secrets.GIT_USERNAME	}}
+  
+  GS_TAB_NAME	: ${{ secrets.GS_TAB_NAME	}}
+  GS_TAB_RANGE : ${{ secrets.GS_TAB_RANGE }}
+  GS_KEY : ${{ secrets.GS_KEY }}
+  OUTPUT_JSON : ${{ secrets.OUTPUT_JSON }}
+  GIT_USERNAME  : ${{ secrets.GIT_USERNAME  }}
   GIT_URI:  ${{ secrets.GIT_URI }}
   GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
   CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON  }}
   PICKLED_TOKEN: ${{ secrets.PICKLED_TOKEN  }}
-  JSON_FN: episodes.json 
 
 on:
   push:

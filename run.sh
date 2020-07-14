@@ -12,7 +12,7 @@ ls -la credentials.json
 ls -la token.pickle 
 
 output=$HOME/out
-JSON_FN=$output/appearances.json
+export JSON_FN=$output/appearances.json
 rm -rf $output
 mkdir -p $output 
 
