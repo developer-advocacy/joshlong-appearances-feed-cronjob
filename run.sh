@@ -1,8 +1,10 @@
 #!/bin/bash
 
+output=$HOME/out
 
 export CREDENTIALS_JSON_FN=${HOME}/credentials.json
 export TOKEN_FN=${HOME}/token.pickle
+export OUTPUT_JSON_FN=$output/appearances.json
 
 cd appearances-site-generator
 
@@ -15,9 +17,9 @@ echo "$CREDENTIALS_JSON" > ${CREDENTIALS_JSON_FN}
 ls -la ${TOKEN_FN}
 ls -la ${CREDENTIALS_JSON_FN}
 
-output=$HOME/out
 
-export OUTPUT_JSON_FN=$output/appearances.json
+
+
 echo "OUTPUT_JSON_FN=$OUTPUT_JSON_FN"
 rm -rf $output
 mkdir -p $output 
