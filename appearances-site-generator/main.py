@@ -42,7 +42,7 @@ class Appearance(object):
         self.marketing_blurb = marketing_blurb
 
 
-def read_appearances_from_google_sheet(sheet, tab: str, tab_range: str, spreadsheet_id: str):
+def read_appearances_from_google_sheet(sheet, tab: str, tab_range: str):
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
 
@@ -57,7 +57,7 @@ def read_appearances_from_google_sheet(sheet, tab: str, tab_range: str, spreadsh
             'appearance, location, start_date, end_date, time, location_address,'
             'confirmed, contact, notes, eyeballs, is_public, marketing_blurb'.split(',')]
     for row in values[1:]:
-        
+
         # this is a little hacky. we know that there can be any of `cols` columns.
         # but the results that we get back are ragged if the righter-most columns are empty
         # so we go L-to-R, incrementing an offset one by one, and noting values
@@ -92,7 +92,7 @@ def main(args):
     with open(credentials_file, 'r') as json_file:
         client_config = json.load(json_file)
 
-    sheet = GSheet(client_config,  pickled_token_fn, spreadsheet_id)
+    sheet = GSheet(client_config,  pickled_token_fn, sheet_key)
     appearances = read_appearances_from_google_sheet(
         sheet, tab_name, sheet_range, sheet_key)
 
