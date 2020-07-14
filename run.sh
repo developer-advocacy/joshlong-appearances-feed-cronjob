@@ -18,7 +18,7 @@ pipenv run python main.py
 cd ..
 
 mkdir -p $output/clone  
-git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/spring-tips/spring-tips.github.io.git $output/clone 
+git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/joshlong/joshlong.github.io-content.git $output/clone 
 cd $output/clone  
 cp $JSON_FN $output/clone
 ls -la 

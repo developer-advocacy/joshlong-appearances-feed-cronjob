@@ -90,11 +90,11 @@ def main(args):
                 ['GS_TAB_NAME', 'GS_TAB_RANGE', 'GS_KEY', 'GOOGLE_CREDENTIALS_JSON', 'OUTPUT_JSON']]
 
     tab_name, sheet_range, sheet_key, credentials_file, output_file_name = production_values()
-
-    assert os.path.exists(credentials_file), 'the file does not exist'
+    
+    assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:
         client_config = json.load(json_file)
-
+    
     appearances = read_appearances_from_google_sheet(
         client_config, tab_name, sheet_range, sheet_key)
 
