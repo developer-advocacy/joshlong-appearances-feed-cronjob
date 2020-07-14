@@ -90,8 +90,8 @@ def main(args):
     tab_name = os.environ ['GS_TAB_NAME']
     sheet_range = os.environ ['GS_TAB_RANGE']
     sheet_key = os.environ ['GS_KEY']
-    credentials_file = os.environ['CREDENTIALS_JSON']
-    output_file_name = os.environ ['JSON_FN']
+    credentials_file = os.environ['CREDENTIALS_JSON_FN']
+    output_file_name = os.environ ['OUTPUT_JSON_FN']
 
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:

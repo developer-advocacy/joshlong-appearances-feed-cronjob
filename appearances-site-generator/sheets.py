@@ -12,10 +12,9 @@ class GSheet(object):
     USER_ENTERED = 'USER_ENTERED'
     INPUT_VALUE_OPTION_UNSPECIFIED = 'INPUT_VALUE_OPTION_UNSPECIFIED'
     RAW = 'RAW'
-
+    
     @staticmethod
     def _obtain_token(credentials_config_str: str) -> Credentials:
-        # if modifying these scopes, delete the file token.pickle.
         scopes = ['https://www.googleapis.com/auth/drive']
         credentials: Credentials = None
         if os.path.exists('token.pickle'):

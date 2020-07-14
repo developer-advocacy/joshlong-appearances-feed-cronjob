@@ -1,19 +1,24 @@
 #!/bin/bash
 
 
+export CREDENTIALS_JSON_FN=${HOME}/credentials.json
+export TOKEN_FN=${HOME}/token.pickle
 
 cd appearances-site-generator
+
 git config --global user.email "josh@joshlong.com"
 git config --global user.name "Appearances Bot"
-echo "$PICKLED_TOKEN" | base64 -d >token.pickle
-echo "$CREDENTIALS_JSON" >credentials.json
 
-ls -la credentials.json 
-ls -la token.pickle 
+echo "$PICKLED_TOKEN" | base64 -d > ${TOKEN_FN}
+echo "$CREDENTIALS_JSON" > ${CREDENTIALS_JSON_FN}
+
+ls -la ${TOKEN_FN}
+ls -la ${CREDENTIALS_JSON_FN}
 
 output=$HOME/out
-export JSON_FN=$output/appearances.json
-echo "JSON_FN=$JSON_FN"
+
+export OUTPUT_JSON_FN=$output/appearances.json
+echo "OUTPUT_JSON_FN=$OUTPUT_JSON_FN"
 rm -rf $output
 mkdir -p $output 
 
