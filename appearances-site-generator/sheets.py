@@ -9,16 +9,17 @@ from googleapiclient.discovery import build
 
 
 class GSheet(object):
+    
     USER_ENTERED = 'USER_ENTERED'
     INPUT_VALUE_OPTION_UNSPECIFIED = 'INPUT_VALUE_OPTION_UNSPECIFIED'
     RAW = 'RAW'
-    
+
     @staticmethod
-    def _obtain_token(credentials_config_str: str) -> Credentials:
+    def _obtain_token(credentials_config_str: str ,  pickle_path_fn: str ) -> Credentials:
         scopes = ['https://www.googleapis.com/auth/drive']
         credentials: Credentials = None
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
+        if os.path.exists(pickle_path_fn):
+            with open(pickle_path_fn, 'rb') as token:
                 credentials = pickle.load(token)
         if not credentials or not credentials.valid:
             if credentials and credentials.expired and credentials.refresh_token:
@@ -26,7 +27,7 @@ class GSheet(object):
             else:
                 flow = InstalledAppFlow.from_client_config(credentials_config_str, scopes)
                 credentials = flow.run_local_server(port=0)
-                with open('token.pickle', 'wb') as token:
+                with open(pickle_path_fn, 'wb') as token:
                     pickle.dump(credentials, token)
         return credentials
 
@@ -47,7 +48,7 @@ class GSheet(object):
             spreadsheetId=self.id, range=spreadsheet_range).execute()
         return result.get('values', [])
 
-    def __init__(self, credentials: str, spreadsheet_id: str):
-        token = self._obtain_token(credentials)
+    def __init__(self, credentials: str, pickle_fn:str, spreadsheet_id: str):
+        token = self._obtain_token(credentials, pickle_fn)
         self.service = build('sheets', 'v4', credentials=token)
         self.id = spreadsheet_id
