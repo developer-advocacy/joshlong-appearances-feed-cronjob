@@ -2,6 +2,7 @@
 
 output=$HOME/out
 
+export GIT_CLONE_DIR=$output/clone
 export CREDENTIALS_JSON_FN=${HOME}/credentials.json
 export TOKEN_FN=${HOME}/token.pickle
 export OUTPUT_JSON_FN=$output/appearances.json
@@ -27,11 +28,13 @@ pipenv install
 pipenv run python main.py  
 cd ..
 
-mkdir -p $output/clone  
-git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/joshlong/joshlong.github.io-content.git $output/clone 
-cd $output/clone  
-cp $JSON_FN $output/clone
-ls -la $JSON_FN
+
+
+mkdir -p $GIT_CLONE_DIR
+git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/joshlong/joshlong.github.io-content.git $GIT_CLONE_DIR
+cd $GIT_CLONE_DIR  
+cp $OUTPUT_JSON_FN $GIT_CLONE_DIR
+ls -la $OUTPUT_JSON_FN
 git add *
 git commit -am "updated $FN @ $(date)"
 git push
