@@ -83,18 +83,20 @@ def read_appearances_from_google_sheet(client_config, tab: str, tab_range: str, 
 
 
 def main(args):
-    
+    # def production_values():
+    #     return [os.environ[a] for a in
+    #             ['GS_TAB_NAME', 'GS_TAB_RANGE', 'GS_KEY', 'GOOGLE_CREDENTIALS_JSON', 'JSON_FN']]
+    # # tab_name, sheet_range, sheet_key, credentials_file, output_file_name = production_values()
+    tab_name = os.environ ['GS_TAB_NAME']
+    sheet_range = os.environ ['GS_TAB_RANGE']
+    sheet_key = os.environ ['GS_KEY']
+    credentials_file = os.environ['GOOGLE_CREDENTIALS_JSON']
+    output_file_name = os.environ ['JSON_FN']
 
-    def production_values():
-        return [os.environ[a] for a in
-                ['GS_TAB_NAME', 'GS_TAB_RANGE', 'GS_KEY', 'GOOGLE_CREDENTIALS_JSON', 'JSON_FN']]
-
-    tab_name, sheet_range, sheet_key, credentials_file, output_file_name = production_values()
-    
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:
         client_config = json.load(json_file)
-    
+
     appearances = read_appearances_from_google_sheet(
         client_config, tab_name, sheet_range, sheet_key)
 
