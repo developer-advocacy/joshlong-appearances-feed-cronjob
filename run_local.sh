@@ -6,6 +6,7 @@ export CREDENTIALS_JSON=$(cat $files/credentials.json)
 echo "$PICKLED_TOKEN" | base64 -d >token.pickle
 echo "$CREDENTIALS_JSON" >credentials.json
 
+
 output=$HOME/Desktop/out
 export JSON_FN=$output/output.json
 export RSS_FN=$output/output.rss
