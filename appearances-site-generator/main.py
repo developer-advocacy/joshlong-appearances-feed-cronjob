@@ -65,7 +65,6 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
         # so we go L-to-R, incrementing an offset one by one, and noting values
         # for as far to the right as we can in a dictionary
 
-
         ctr = 0
         d = {}
         len_of_row = len(row)
@@ -106,8 +105,7 @@ def main(args):
     appearances = read_appearances_from_google_sheet(sheet, tab_name, sheet_range)
 
     def create_public_view(entry: typing.Dict) -> typing.Dict:
-        public_keys = ['appearance',  'start_date',
-                       'end_date', 'time', 'marketing_blurb']
+        public_keys = ['appearance', 'start_date', 'end_date', 'time', 'marketing_blurb']
         result = {}
         for pk in public_keys:
             if pk in entry:
