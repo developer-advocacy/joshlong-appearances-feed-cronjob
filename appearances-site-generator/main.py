@@ -65,6 +65,7 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
         # so we go L-to-R, incrementing an offset one by one, and noting values
         # for as far to the right as we can in a dictionary
 
+
         ctr = 0
         d = {}
         len_of_row = len(row)
