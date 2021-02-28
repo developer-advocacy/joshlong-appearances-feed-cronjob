@@ -55,8 +55,9 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
-            'appearance, location, start_date, end_date, time, location_address,'
-            'confirmed, contact, notes, eyeballs, is_public, marketing_blurb'.split(',')]
+            ('appearance, location,start_date,end_date,time,is_public,marketing_blurb,'
+             'location_address,addreess,contact,notes,eyeballs,confirmed, contact, notes, eyeballs').split(',')
+            ]
     for row in values[1:]:
 
         # this is a little hacky. we know that there can be any of `cols` columns.
