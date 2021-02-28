@@ -25,7 +25,8 @@ rm -rf $output
 mkdir -p $output 
 
 pipenv install
-pipenv run python main.py  
+pipenv run python main.py
+cat $OUTPUT_JSON_FN
 cd ..
 
 
