@@ -26,7 +26,9 @@ mkdir -p $output
 
 pipenv install
 pipenv run python main.py
+echo "---"
 cat $OUTPUT_JSON_FN
+echo "---"
 cd ..
 
 
