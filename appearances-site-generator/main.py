@@ -43,7 +43,7 @@ class Appearance(object):
 
 
 # sheet, tab_name, sheet_range, sheet_key
-def read_appearances_from_google_sheet(sheet:GSheet, tab: str, tab_range: str ):
+def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
 
@@ -82,21 +82,30 @@ def read_appearances_from_google_sheet(sheet:GSheet, tab: str, tab_range: str ):
 
 
 def main(args):
-    tab_name = os.environ ['GS_TAB_NAME']
-    sheet_range = os.environ ['GS_TAB_RANGE']
-    sheet_key = os.environ ['GS_KEY']
+    tab_name = os.environ['GS_TAB_NAME']
+    sheet_range = os.environ['GS_TAB_RANGE']
+    sheet_key = os.environ['GS_KEY']
     credentials_file = os.environ['CREDENTIALS_JSON_FN']
-    output_file_name = os.environ ['OUTPUT_JSON_FN']
-    pickled_token_fn = os.environ ['TOKEN_FN']
+    output_file_name = os.environ['OUTPUT_JSON_FN']
+    pickled_token_fn = os.environ['TOKEN_FN']
+
+    for k, v in {'tab_name': tab_name,
+                 'sheet_range': sheet_range,
+                 'sheet_key': sheet_key,
+                 'output_file_name': output_file_name,
+                 'pickled_token_fn': pickled_token_fn
+                 }:
+        print(k, '=', v)
 
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:
         client_config = json.load(json_file)
-    sheet = GSheet(client_config,  pickled_token_fn, sheet_key)
+    sheet = GSheet(client_config, pickled_token_fn, sheet_key)
     appearances = read_appearances_from_google_sheet(sheet, tab_name, sheet_range)
 
     def create_public_view(entry: typing.Dict) -> typing.Dict:
-        public_keys = ['appearance', 'location', 'start_date', 'end_date', 'time', 'location_address', 'marketing_blurb']
+        public_keys = ['appearance', 'location', 'start_date',
+                       'end_date', 'time', 'location_address', 'marketing_blurb']
         result = {}
         for pk in public_keys:
             if pk in entry:
