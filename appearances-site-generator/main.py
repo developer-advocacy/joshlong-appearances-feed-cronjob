@@ -51,7 +51,9 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
         return col
 
     def bool_converter(col: str) -> bool:
-        return not (col is None or col.strip() == '' or col.strip().lower() == 'false' or col.strip().lower() == 'no')
+        # it's false for all scenarios except 'y'
+        return col is not None and col.lower().strip() == 'y'
+        # not (col is None or col.strip() == '' or col.strip().lower() == 'false' or col.strip().lower() == 'no')
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
