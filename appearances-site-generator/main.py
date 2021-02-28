@@ -105,8 +105,8 @@ def main(args):
     appearances = read_appearances_from_google_sheet(sheet, tab_name, sheet_range)
 
     def create_public_view(entry: typing.Dict) -> typing.Dict:
-        public_keys = ['appearance', 'location', 'start_date',
-                       'end_date', 'time', 'location_address', 'marketing_blurb']
+        public_keys = ['appearance',  'start_date',
+                       'end_date', 'time', 'marketing_blurb']
         result = {}
         for pk in public_keys:
             if pk in entry:
