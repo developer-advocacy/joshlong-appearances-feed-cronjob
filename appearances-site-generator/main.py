@@ -94,7 +94,7 @@ def main(args):
                  'sheet_key': sheet_key,
                  'output_file_name': output_file_name,
                  'pickled_token_fn': pickled_token_fn
-                 }:
+                 }.items():
         print(k, '=', v)
 
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
