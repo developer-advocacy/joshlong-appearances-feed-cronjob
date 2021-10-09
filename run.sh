@@ -46,7 +46,7 @@ git commit -am "updated $FN @ $(date)" && git push  || echo "It was not possible
 git config --global user.name "$EXISTING_GIT_USERNAME"
 
 
-sleep 1m  # give the cached http urls in github time to invalidate their caches so when we get to the next step, were not pulling down cached URIs
+sleep 3m  # give the cached http urls in github time to invalidate their caches so when we get to the next step, were not pulling down cached URIs
 
 curl -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${GH_PAT}" --request POST  --data '{"event_type": "update-event"}' https://api.github.com/repos/joshlong/joshlong-feed-processor/dispatches
 echo "the appearances-processor has finished. Triggered an update-event for the feed-processor to revise the HTML."
