@@ -15,6 +15,7 @@ class Appearance(object):
             lines.append('%s: %s' % (k, v))
         return str(', '.join(lines))
 
+    
     def __init__(self,
                  appearance: str = None,
                  event: str = None,
