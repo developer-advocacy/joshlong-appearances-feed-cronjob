@@ -35,8 +35,6 @@ cat $OUTPUT_JSON_FN
 echo "---"
 cd ..
 
-
-
 mkdir -p $GIT_CLONE_DIR
 git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/joshlong/joshlong.github.io-content.git $GIT_CLONE_DIR
 cd $GIT_CLONE_DIR  
