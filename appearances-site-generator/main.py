@@ -15,9 +15,8 @@ class Appearance(object):
             lines.append('%s: %s' % (k, v))
         return str(', '.join(lines))
 
-    
+
     def __init__(self,
-                 appearance: str = None,
                  event: str = None,
                  location: str = None,
                  start_date: str = None,
@@ -31,7 +30,6 @@ class Appearance(object):
                  is_public: bool = False,
                  marketing_blurb: str = None) -> None:
         self.event = event
-        self.appearance = event
         self.location = location
         self.start_date = start_date
         self.end_date = end_date
@@ -44,9 +42,8 @@ class Appearance(object):
         self.is_public = is_public
         self.marketing_blurb = marketing_blurb
 
-
 # sheet, tab_name, sheet_range, sheet_key
-def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
+def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str) :
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
 
