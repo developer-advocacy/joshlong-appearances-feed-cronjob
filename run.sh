@@ -43,7 +43,5 @@ cd $GIT_CLONE_DIR
 cp $OUTPUT_JSON_FN $GIT_CLONE_DIR/content/appearances.json
 ls -la $OUTPUT_JSON_FN
 git add *
-git commit -am "updated $FN @ $(date)"
-git push
-
+git commit -am "updated $FN @ $(date)" && git push  || echo "It was not possible to commit the results. Perhaps nothing changed?" 
 git config --global user.name "$EXISTING_GIT_USERNAME"
