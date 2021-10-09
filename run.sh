@@ -18,6 +18,7 @@ git config --global user.name "Appearances Bot"
 echo "$PICKLED_TOKEN" | base64 -d > ${TOKEN_FN}
 echo "$CREDENTIALS_JSON" > ${CREDENTIALS_JSON_FN}
 
+
 ls -la ${TOKEN_FN}
 ls -la ${CREDENTIALS_JSON_FN}
 
