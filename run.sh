@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e 
+
 output=$HOME/out
 
 export GIT_CLONE_DIR=$output/clone
