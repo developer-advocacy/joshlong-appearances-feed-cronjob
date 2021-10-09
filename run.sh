@@ -44,3 +44,8 @@ ls -la $OUTPUT_JSON_FN
 git add *
 git commit -am "updated $FN @ $(date)" && git push  || echo "It was not possible to commit the results. Perhaps nothing changed?" 
 git config --global user.name "$EXISTING_GIT_USERNAME"
+
+
+
+curl -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${GH_PAT}" --request POST  --data '{"event_type": "update-event"}' https://api.github.com/repos/joshlong/joshlong-feed-processor/dispatches
+echo "the appearances-processor has finished. Triggered an update-event for the feed-processor to revise the HTML."
