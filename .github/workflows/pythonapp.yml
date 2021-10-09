@@ -1,7 +1,7 @@
 name: Public Appearances Feed Processor
 
 env:
-  
+  GH_PAT:  ${{ secrets.GH_PAT }}
   GS_TAB_NAME	: ${{ secrets.GS_TAB_NAME	}}
   GS_TAB_RANGE : ${{ secrets.GS_TAB_RANGE }}
   GS_KEY : ${{ secrets.GS_KEY }}
