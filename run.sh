@@ -9,6 +9,7 @@ export OUTPUT_JSON_FN=$output/appearances.json
 
 cd appearances-site-generator
 
+export EXISTING_GIT_USERNAME=$( git config --global user.name  )
 git config --global user.email "josh@joshlong.com"
 git config --global user.name "Appearances Bot"
 
@@ -42,3 +43,5 @@ ls -la $OUTPUT_JSON_FN
 git add *
 git commit -am "updated $FN @ $(date)"
 git push
+
+git config --global user.name "$EXISTING_GIT_USERNAME"

@@ -17,6 +17,7 @@ class Appearance(object):
 
     def __init__(self,
                  appearance: str = None,
+                 event: str = None,
                  location: str = None,
                  start_date: str = None,
                  end_date: str = None,
@@ -28,7 +29,8 @@ class Appearance(object):
                  eyeballs: int = 0,
                  is_public: bool = False,
                  marketing_blurb: str = None) -> None:
-        self.appearance = appearance
+        self.event = event
+        self.appearance = event
         self.location = location
         self.start_date = start_date
         self.end_date = end_date
@@ -57,7 +59,7 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
-            ('appearance, location,start_date,end_date,time,is_public,marketing_blurb,'
+            ('event,subject_content,location,start_date,end_date,time,is_public,marketing_blurb,'
              'location_address,addreess,contact,notes,eyeballs,confirmed, contact, notes, eyeballs').split(',')
             ]
     for row in values[1:]:
@@ -85,9 +87,9 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
 
 
 def main(args):
-    tab_name = os.environ['GS_TAB_NAME']
-    sheet_range = os.environ['GS_TAB_RANGE']
-    sheet_key = os.environ['GS_KEY']
+    tab_name = os.environ['GS_TAB_NAME']  # Josh
+    sheet_range = os.environ['GS_TAB_RANGE']  # something like A1:N
+    sheet_key = os.environ['GS_KEY']  # the UUID in the URL for the spreadsheet
     credentials_file = os.environ['CREDENTIALS_JSON_FN']
     output_file_name = os.environ['OUTPUT_JSON_FN']
     pickled_token_fn = os.environ['TOKEN_FN']
@@ -103,11 +105,12 @@ def main(args):
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:
         client_config = json.load(json_file)
+    print('about to open ', json_file)
     sheet = GSheet(client_config, pickled_token_fn, sheet_key)
     appearances = read_appearances_from_google_sheet(sheet, tab_name, sheet_range)
 
     def create_public_view(entry: typing.Dict) -> typing.Dict:
-        public_keys = ['appearance', 'start_date', 'end_date', 'time', 'marketing_blurb']
+        public_keys = ['event', 'start_date', 'end_date', 'time', 'marketing_blurb']
         result = {}
         for pk in public_keys:
             if pk in entry:
