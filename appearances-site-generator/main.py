@@ -26,7 +26,6 @@ class Appearance(object):
                  location_address: str = None,
                  confirmed: bool = None,
                  contact: str = None,
-                 notes: str = None,
                  eyeballs: int = 0,
                  is_public: bool = False,
                  marketing_blurb: str = None) -> None:
