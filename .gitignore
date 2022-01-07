@@ -2,3 +2,4 @@ credentials.json
 token.pickle
 .idea
 __pycache__
+appearances-site-generator/run.sh

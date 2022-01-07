@@ -1,10 +1,9 @@
 import json
 import os
 import sys
+import typing
 
 from sheets import *
-
-import typing
 
 
 class Appearance(object):
@@ -15,9 +14,8 @@ class Appearance(object):
             lines.append('%s: %s' % (k, v))
         return str(', '.join(lines))
 
-
     def __init__(self,
-                 notes : str = None,
+                 notes: str = None,
                  event: str = None,
                  location: str = None,
                  start_date: str = None,
@@ -40,11 +38,12 @@ class Appearance(object):
         self.notes = notes
         self.eyeballs = eyeballs
         self.is_public = is_public
-        self.notes = notes 
+        self.notes = notes
         self.marketing_blurb = marketing_blurb
 
+
 # sheet, tab_name, sheet_range, sheet_key
-def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str) :
+def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
 
@@ -59,8 +58,7 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str) 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
             ('event,notes,subject_content,location,start_date,end_date,time,is_public,marketing_blurb,'
-             'location_address,addreess,contact,notes,eyeballs,confirmed, contact, notes, eyeballs').split(',')
-            ]
+             'location_address,addreess,contact,notes,eyeballs,confirmed, contact, notes, eyeballs').split(',')]
     for row in values[1:]:
 
         # this is a little hacky. we know that there can be any of `cols` columns.
