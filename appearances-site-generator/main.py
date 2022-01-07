@@ -38,11 +38,9 @@ class Appearance(object):
         self.notes = notes
         self.eyeballs = eyeballs
         self.is_public = is_public
-        self.notes = notes
         self.marketing_blurb = marketing_blurb
 
 
-# sheet, tab_name, sheet_range, sheet_key
 def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
@@ -51,14 +49,15 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
         return col
 
     def bool_converter(col: str) -> bool:
-        # it's false for all scenarios except 'y'
-        return col is not None and col.lower().strip() == 'y'
-        # not (col is None or col.strip() == '' or col.strip().lower() == 'false' or col.strip().lower() == 'no')
+        valid = [a.strip() for a in ['y', 't', '1']]
+        return col is not None and col.lower().strip() in valid
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
-            ('event,notes,subject_content,location,start_date,end_date,time,is_public,marketing_blurb,'
-             'location_address,addreess,contact,notes,eyeballs,confirmed, contact, notes, eyeballs').split(',')]
+            ['event', 'notes', 'subject_content', 'location', 'start_date', 'end_date', 'time', 'is_public',
+             'marketing_blurb', 'speaking_engagement ', 'location_address', 'contact',
+             'notes', 'eyeballs', 'confirmed', 'contact', 'notes', 'eyeballs']]
+
     for row in values[1:]:
 
         # this is a little hacky. we know that there can be any of `cols` columns.
@@ -84,6 +83,7 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
 
 
 def main(args):
+    DEBUG = False
     tab_name = os.environ['GS_TAB_NAME']  # Josh
     sheet_range = os.environ['GS_TAB_RANGE']  # something like A1:N
     sheet_key = os.environ['GS_KEY']  # the UUID in the URL for the spreadsheet
@@ -91,13 +91,14 @@ def main(args):
     output_file_name = os.environ['OUTPUT_JSON_FN']
     pickled_token_fn = os.environ['TOKEN_FN']
 
-    for k, v in {'tab_name': tab_name,
-                 'sheet_range': sheet_range,
-                 'sheet_key': sheet_key,
-                 'output_file_name': output_file_name,
-                 'pickled_token_fn': pickled_token_fn
-                 }.items():
-        print(k, '=', v[::-1])
+    if DEBUG:
+        for k, v in {'tab_name': tab_name,
+                     'sheet_range': sheet_range,
+                     'sheet_key': sheet_key,
+                     'output_file_name': output_file_name,
+                     'pickled_token_fn': pickled_token_fn
+                     }.items():
+            print(k, '=', v[::-1])
 
     assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
     with open(credentials_file, 'r') as json_file:
@@ -118,6 +119,7 @@ def main(args):
 
     with open(output_file_name, 'w') as fp:
         fp.write(json.dumps(public_appearances))
+        print('wrote the feed to ', output_file_name)
 
 
 if __name__ == '__main__':
