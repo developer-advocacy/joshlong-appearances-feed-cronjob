@@ -26,7 +26,6 @@ ls -la ${CREDENTIALS_JSON_FN}
 echo "TOKEN_FN=$TOKEN_FN"
 echo "OUTPUT_JSON_FN=$OUTPUT_JSON_FN"
 
-
 rm -rf $output
 mkdir -p $output 
 
