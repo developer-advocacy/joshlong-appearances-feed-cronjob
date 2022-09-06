@@ -2,9 +2,13 @@ name: Public Appearances Feed Processor
 
 env:
   GH_PAT:  ${{ secrets.GH_PAT }}
-  GS_TAB_NAME	: ${{ secrets.GS_TAB_NAME	}}
-  GS_TAB_RANGE : ${{ secrets.GS_TAB_RANGE }}
-  GS_KEY : ${{ secrets.GS_KEY }}
+  
+  AUTHENTICATED_CREDENTIALS_JSON: ${{ secrets.AUTHENTICATED_CREDENTIALS_JSON }}
+  CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
+
+  # GS_TAB_NAME	: ${{ secrets.GS_TAB_NAME	}}
+  # GS_TAB_RANGE : ${{ secrets.GS_TAB_RANGE }}
+  # GS_KEY : ${{ secrets.GS_KEY }}
   OUTPUT_JSON : ${{ secrets.OUTPUT_JSON }}
   GIT_USERNAME  : ${{ secrets.GIT_USERNAME  }}
   GIT_URI:  ${{ secrets.GIT_URI }}

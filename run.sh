@@ -10,7 +10,6 @@ export OUTPUT_JSON_FN=$OUTPUT/appearances.json
 echo "${AUTHENTICATED_CREDENTIALS_JSON}" | base64 -d > $AUTHENTICATED_CREDENTIALS_JSON_FN
 echo "${CREDENTIALS_JSON}" | base64 -d > $CREDENTIALS_JSON_FN
 
-cd appearances-site-generator
 export EXISTING_GIT_USERNAME=$( git config --global user.name  )
 git config --global user.email "josh@joshlong.com"
 git config --global user.name "Appearances Bot"
@@ -18,6 +17,7 @@ git config --global user.name "Appearances Bot"
 rm -rf $OUTPUT
 mkdir -p $OUTPUT
 
+cd appearances-site-generator
 pipenv install
 pipenv run python main.py
 

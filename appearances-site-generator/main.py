@@ -58,11 +58,6 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
             ['event', 'notes', 'subject_content', 'location', 'start_date', 'end_date', 'time', 'time_notes',
              'is_public', 'marketing_blurb', 'speaking_engagement ', 'location_address', 'contact', 'eyeballs']]
     for row in values[1:]:
-        # this is a little hacky. we know that there can be any of `cols` columns.
-        # but the results that we get back are ragged if the righter-most columns are empty
-        # so we go L-to-R, incrementing an offset one by one, and noting values
-        # for as far to the right as we can in a dictionary
-
         ctr = 0
         d = {}
         len_of_row = len(row)
