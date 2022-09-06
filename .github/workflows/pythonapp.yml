@@ -13,6 +13,7 @@ env:
   GIT_USERNAME  : ${{ secrets.GIT_USERNAME  }}
   GIT_URI:  ${{ secrets.GIT_URI }}
   GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+  SHEET_ID: ${{ secrets.SHEET_ID }}
 
 on:
   push:
