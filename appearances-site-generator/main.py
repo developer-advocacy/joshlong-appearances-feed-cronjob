@@ -1,9 +1,10 @@
 import json
 import os
-import sys
 import typing
 
-from sheets import *
+import auth
+import google.sheets
+from google import sheets
 
 
 class Appearance(object):
@@ -41,7 +42,7 @@ class Appearance(object):
         self.marketing_blurb = marketing_blurb
 
 
-def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
+def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: str, tab_range: str):
     values = sheet.read_values('%s!%s' % (tab, tab_range))
     appearances = []
 
@@ -54,12 +55,9 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
-            ['event', 'notes', 'subject_content', 'location', 'start_date', 'end_date', 'time', 'is_public',
-             'marketing_blurb', 'speaking_engagement ', 'location_address', 'contact',
-             'notes', 'eyeballs', 'confirmed', 'contact', 'notes', 'eyeballs']]
-
+            ['event', 'notes', 'subject_content', 'location', 'start_date', 'end_date', 'time', 'time_notes',
+             'is_public', 'marketing_blurb', 'speaking_engagement ', 'location_address', 'contact', 'eyeballs']]
     for row in values[1:]:
-
         # this is a little hacky. we know that there can be any of `cols` columns.
         # but the results that we get back are ragged if the righter-most columns are empty
         # so we go L-to-R, incrementing an offset one by one, and noting values
@@ -79,35 +77,22 @@ def read_appearances_from_google_sheet(sheet: GSheet, tab: str, tab_range: str):
                 parser = custom_parsers[k]
             setattr(appearance, k, parser(v))
         appearances.append(appearance)
+
     return appearances
 
 
-def main(args):
-    DEBUG = False
-    tab_name = os.environ['GS_TAB_NAME']  # Josh
-    sheet_range = os.environ['GS_TAB_RANGE']  # something like A1:N
-    sheet_key = os.environ['GS_KEY']  # the UUID in the URL for the spreadsheet
-    credentials_file = os.environ['CREDENTIALS_JSON_FN']
-    output_file_name = os.environ['OUTPUT_JSON_FN']
-    pickled_token_fn = os.environ['TOKEN_FN']
-
-    if DEBUG:
-        for k, v in {'tab_name': tab_name,
-                     'sheet_range': sheet_range,
-                     'sheet_key': sheet_key,
-                     'output_file_name': output_file_name,
-                     'pickled_token_fn': pickled_token_fn
-                     }.items():
-            print(k, '=', v[::-1])
-
-    assert os.path.exists(credentials_file), 'the file %s does not exist' % credentials_file
-    with open(credentials_file, 'r') as json_file:
-        client_config = json.load(json_file)
-    print('about to open ', json_file)
-    sheet = GSheet(client_config, pickled_token_fn, sheet_key)
-    appearances = read_appearances_from_google_sheet(sheet, tab_name, sheet_range)
+def main():
+    scopes: list = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/calendar']
+    token_json_fn: str = os.environ['CREDENTIALS_JSON_FN']
+    authenticated_token_json_fn: str = os.environ['AUTHENTICATED_CREDENTIALS_JSON_FN']
+    credentials = auth.authenticate(token_json_fn, authenticated_token_json_fn, scopes)
+    assert credentials is not None, 'the credentials must be valid!'
+    sheet_id = os.environ['SHEET_ID']
+    my_sheet: sheets.GoogleSheet = sheets.GoogleSheet(credentials, sheet_id)
+    appearances = read_appearances_from_google_sheet(my_sheet, 'Josh', 'A:Z')
 
     def create_public_view(entry: typing.Dict) -> typing.Dict:
+        print(entry)
         public_keys = ['event', 'start_date', 'end_date', 'time', 'marketing_blurb']
         result = {}
         for pk in public_keys:
@@ -116,11 +101,11 @@ def main(args):
         return result
 
     public_appearances = [create_public_view(a.__dict__) for a in appearances if a.is_public is True]
-
-    with open(output_file_name, 'w') as fp:
-        fp.write(json.dumps(public_appearances))
-        print('wrote the feed to ', output_file_name)
+    print(json.dumps(public_appearances))
+    # with open(output_file_name, 'w') as fp:
+    #     fp.write(json.dumps(public_appearances))
+    #     print('wrote the feed to ', output_file_name)
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    main()

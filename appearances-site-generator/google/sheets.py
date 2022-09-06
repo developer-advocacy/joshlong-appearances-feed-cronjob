@@ -2,20 +2,22 @@ import os.path
 import os.path
 import pickle
 
+import googleapiclient.discovery
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 
-class GSheet(object):
-    
+class GoogleSheet(object):
     USER_ENTERED = 'USER_ENTERED'
     INPUT_VALUE_OPTION_UNSPECIFIED = 'INPUT_VALUE_OPTION_UNSPECIFIED'
     RAW = 'RAW'
 
+    ## todo can this logic for obtainng a token be extracted
+    #  todo out across the two different clients?
     @staticmethod
-    def _obtain_token(credentials_config_str: str ,  pickle_path_fn: str ) -> Credentials:
+    def _obtain_token(credentials_config_str: str, pickle_path_fn: str) -> Credentials:
         scopes = ['https://www.googleapis.com/auth/drive']
         credentials: Credentials = None
         if os.path.exists(pickle_path_fn):
@@ -48,7 +50,9 @@ class GSheet(object):
             spreadsheetId=self.id, range=spreadsheet_range).execute()
         return result.get('values', [])
 
-    def __init__(self, credentials: str, pickle_fn:str, spreadsheet_id: str):
-        token = self._obtain_token(credentials, pickle_fn)
-        self.service = build('sheets', 'v4', credentials=token)
+    def __init__(self, credentials: Credentials, spreadsheet_id: str):
+        assert credentials is not None, 'the credentials must be valid'
+        assert spreadsheet_id is not None, 'the spreadsheet_id must be valid'
+        self.service: googleapiclient.discovery.Resource = build('sheets', 'v4',
+                                                                 credentials=credentials)
         self.id = spreadsheet_id
