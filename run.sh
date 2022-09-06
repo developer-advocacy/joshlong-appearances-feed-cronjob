@@ -16,6 +16,7 @@ export EXISTING_GIT_USERNAME=$( git config --global user.name  )
 git config --global user.email "josh@joshlong.com"
 git config --global user.name "Appearances Bot"
 
+
 rm -rf $output
 mkdir -p $output 
 
