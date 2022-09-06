@@ -83,6 +83,7 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
 
 def main():
     scopes: list = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/calendar']
+    output_json_fn = os.environ ['OUTPUT_JSON_FN']
     token_json_fn: str = os.environ['CREDENTIALS_JSON_FN']
     authenticated_token_json_fn: str = os.environ['AUTHENTICATED_CREDENTIALS_JSON_FN']
     credentials = auth.authenticate(token_json_fn, authenticated_token_json_fn, scopes)
@@ -102,9 +103,9 @@ def main():
 
     public_appearances = [create_public_view(a.__dict__) for a in appearances if a.is_public is True]
     print(json.dumps(public_appearances))
-    # with open(output_file_name, 'w') as fp:
-    #     fp.write(json.dumps(public_appearances))
-    #     print('wrote the feed to ', output_file_name)
+    with open(output_json_fn, 'w') as fp:
+        fp.write(json.dumps(public_appearances))
+        print('wrote the feed to ', output_json_fn)
 
 
 if __name__ == '__main__':
