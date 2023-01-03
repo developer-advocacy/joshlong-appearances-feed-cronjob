@@ -1,15 +1,4 @@
-# joshlong.com/feed.html feed generator 
-
-This captures information related to my public appearances and writes them out to a `.json` file so that they can be integrated into feeds, like on [joshlong.com/feed.html](https://joshlong.com/feed.html)
-
-This script requires certain environment variables specific to this particular application. I've put those in a Lastpass folder called `developer-advocacy` under the name `appearances-processor`. 
-
-This requires two variables - `AUTHENTICATED_CREDENTIALS_JSON`, AND `CREDENTIALS_JSON` to contain the values of `authenticated-credentials.json` and `credentials.json` under the `developer-advocacy` folder in LastPass. The contents of these variables should be the `base64` encoded values of those files. 
-
-
-
-
-## Appearance Planner 
+# Appearance Planner 
 
 This takes the information from my Google Docs spreadsheet and dumps it into a `.json` file that can be used to synchronize other services with my public appearances (virtual or otherwise). 
 
