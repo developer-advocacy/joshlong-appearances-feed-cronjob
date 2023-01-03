@@ -31,8 +31,6 @@ jobs:
           python-version: 3.9
           cache: 'pip'
 
-      - run: pip install pipenv
-
       - name: Run the Google Sheet Ingest Routine
         run: ./run.sh
 

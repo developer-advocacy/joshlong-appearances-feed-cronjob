@@ -17,7 +17,7 @@ git config --global user.name "Appearances Bot"
 rm -rf $OUTPUT
 mkdir -p $OUTPUT
 
-cd app
+pip install pipenv
 pipenv install
 pipenv run python main.py
 
