@@ -14,8 +14,6 @@ class GoogleSheet(object):
     INPUT_VALUE_OPTION_UNSPECIFIED = 'INPUT_VALUE_OPTION_UNSPECIFIED'
     RAW = 'RAW'
 
-    ## todo can this logic for obtainng a token be extracted
-    #  todo out across the two different clients?
     @staticmethod
     def _obtain_token(credentials_config_str: str, pickle_path_fn: str) -> Credentials:
         scopes = ['https://www.googleapis.com/auth/drive']

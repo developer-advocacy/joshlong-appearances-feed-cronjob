@@ -78,9 +78,9 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
 
 def main():
     scopes: list = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/calendar']
-    output_json_fn = os.environ ['OUTPUT_JSON_FN']
-    token_json_fn: str = os.environ['CREDENTIALS_JSON_FN']
-    authenticated_token_json_fn: str = os.environ['AUTHENTICATED_CREDENTIALS_JSON_FN']
+    output_json_fn = os.path.expanduser(os.environ['OUTPUT_JSON_FN'])
+    token_json_fn: str = os.path.expanduser(os.environ['CREDENTIALS_JSON_FN'])
+    authenticated_token_json_fn: str = os.path.expanduser(os.environ['AUTHENTICATED_CREDENTIALS_JSON_FN'])
     credentials = auth.authenticate(token_json_fn, authenticated_token_json_fn, scopes)
     assert credentials is not None, 'the credentials must be valid!'
     sheet_id = os.environ['SHEET_ID']

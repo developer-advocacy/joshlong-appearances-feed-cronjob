@@ -1,8 +1,12 @@
 # Appearance Planner 
 
-
-
 This takes the information from my Google Docs spreadsheet and dumps it into a `.json` file that can be used to synchronize other services with my public appearances (virtual or otherwise). 
+
+## Getting a New Token
+
+The application uses a token from Google Cloud to talk to the spreadsheet. You need to go to https://console.cloud.google.com/apis/credentials?project=<YOUR_PROJECT> and create a new OAuth 2 Client ID, choose "Desktop" application, then download the resulting .json file
+
+
 
 ## Building 
 
@@ -19,16 +23,11 @@ The information in `token.pickle` is binary data, so I've run it through the fol
 PICKLED_TOKEN=$( cat token.pickle | base64 ) 
 ```
 
-In order to get this to work on Github Actions, I just copied the value to the clipboard and then pasted it into the `Secrets` section for my Github Actions as a new environment variable, `PICKLED_TOKEN`.  
+In order to get this to work on GitHub Actions, I just copied the value to the clipboard and then pasted it into the `Secrets` section for my GitHub Actions as a new environment variable, `PICKLED_TOKEN`.  
 
 ```shell 
  cat token.pickle | base64 | pbcopy
 ```
 
 I also created a new environment variable, `CREDENTIALS_JSON`, for the text data in the `credentials.json` file. 
-
-
-   
-
-
 
