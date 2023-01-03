@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-export OUTPUT=$HOME/out
-export GIT_CLONE_DIR=$OUTPUT/clone
 export CREDENTIALS_JSON_FN=$HOME/credentials.json
 export AUTHENTICATED_CREDENTIALS_JSON_FN=$HOME/authenticated-credentials.json
+export OUTPUT=$HOME/out
+export GIT_CLONE_DIR=$OUTPUT/clone
 export OUTPUT_JSON_FN=$OUTPUT/appearances.json
 
 echo "${AUTHENTICATED_CREDENTIALS_JSON}" | base64 -d > $AUTHENTICATED_CREDENTIALS_JSON_FN
