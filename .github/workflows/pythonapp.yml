@@ -1,18 +1,12 @@
-name: Public Appearances Feed Processor
+name: Appearances Feed Processor
 
 env:
   GH_PAT:  ${{ secrets.GH_PAT }}
-  
+  GIT_USERNAME  : ${{ secrets.GIT_USERNAME  }}
   AUTHENTICATED_CREDENTIALS_JSON: ${{ secrets.AUTHENTICATED_CREDENTIALS_JSON }}
   CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
-
-  # GS_TAB_NAME	: ${{ secrets.GS_TAB_NAME	}}
-  # GS_TAB_RANGE : ${{ secrets.GS_TAB_RANGE }}
-  # GS_KEY : ${{ secrets.GS_KEY }}
   OUTPUT_JSON : ${{ secrets.OUTPUT_JSON }}
-  GIT_USERNAME  : ${{ secrets.GIT_USERNAME  }}
   GIT_URI:  ${{ secrets.GIT_URI }}
-  GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
   SHEET_ID: ${{ secrets.SHEET_ID }}
 
 on:
@@ -29,16 +23,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Install pipenv
-        uses: dschep/install-pipenv-action@v1
+      - uses: actions/checkout@v3
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
+          cache: 'pip'
 
-      - name: Run the Google Sheet Ingest Routine 
+      - run: pip install pipenv
+
+      - name: Run the Google Sheet Ingest Routine
         run: ./run.sh
-
 
