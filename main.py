@@ -17,6 +17,8 @@ class Appearance(object):
 
     def __init__(self,
                  notes: str = None,
+                 type : str= None, 
+                 approved : bool = False,
                  event: str = None,
                  location: str = None,
                  start_date: str = None,
@@ -33,6 +35,7 @@ class Appearance(object):
         self.start_date = start_date
         self.end_date = end_date
         self.time = time
+        self.approved = approved
         self.location_address = location_address
         self.confirmed = confirmed
         self.contact = contact
@@ -55,8 +58,7 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
-            ['event', 'notes', 'subject_content', 'location', 'start_date', 'end_date', 'time', 'time_notes',
-             'is_public', 'marketing_blurb', 'speaking_engagement ', 'location_address', 'contact', 'eyeballs']]
+            ['event', 'type' , 'start_date', 'end_date', 'notes', 'time',  'location',  'subject_content',  'approved' ,  'is_public', 'marketing_blurb', 'speaking_engagement', 'location_address',   'contact', 'eyeballs']]
     for row in values[1:]:
         ctr = 0
         d = {}
@@ -72,7 +74,6 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
                 parser = custom_parsers[k]
             setattr(appearance, k, parser(v))
         appearances.append(appearance)
-
     return appearances
 
 
