@@ -79,6 +79,7 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
     return appearances
 
 
+
 def main():
     scopes: list = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/calendar']
     output_json_fn = os.path.expanduser(os.environ['OUTPUT_JSON_FN'])
