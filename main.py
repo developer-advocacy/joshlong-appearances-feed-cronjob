@@ -17,8 +17,8 @@ class Appearance(object):
 
     def __init__(self,
                  notes: str = None,
-                 type : str= None, 
-                 approved : bool = False,
+                 type: str = None,
+                 approved: bool = False,
                  event: str = None,
                  location: str = None,
                  start_date: str = None,
@@ -43,6 +43,7 @@ class Appearance(object):
         self.eyeballs = eyeballs
         self.is_public = is_public
         self.marketing_blurb = marketing_blurb
+        self.type = type
 
 
 def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: str, tab_range: str):
@@ -58,7 +59,8 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
 
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
-            ['event', 'type' , 'start_date', 'end_date', 'notes', 'time',  'location',  'subject_content',  'approved' ,  'is_public', 'marketing_blurb', 'speaking_engagement', 'location_address',   'contact', 'eyeballs']]
+            ['event', 'type', 'start_date', 'end_date', 'notes', 'time', 'location', 'subject_content', 'approved',
+             'is_public', 'marketing_blurb', 'speaking_engagement', 'location_address', 'contact', 'eyeballs']]
     for row in values[1:]:
         ctr = 0
         d = {}
@@ -81,7 +83,7 @@ def main():
     scopes: list = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/calendar']
     output_json_fn = os.path.expanduser(os.environ['OUTPUT_JSON_FN'])
     token_json_fn: str = os.path.expanduser(os.environ['CREDENTIALS_JSON_FN'])
-    authenticated_token_json_fn: str = os.path.expanduser(os.environ['AUTHENTICATED_CREDENTIALS_JSON_FN'])
+    authenticated_token_json_fn: str = os.path.expanduser(os.environ ['AUTHENTICATED_CREDENTIALS_JSON_FN' ])
     credentials = auth.authenticate(token_json_fn, authenticated_token_json_fn, scopes)
     assert credentials is not None, 'the credentials must be valid!'
     sheet_id = os.environ['SHEET_ID']
