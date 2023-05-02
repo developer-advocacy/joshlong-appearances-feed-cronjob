@@ -9,7 +9,7 @@ env:
   GIT_URI: ${{ secrets.GIT_URI }}
   SHEET_ID: ${{ secrets.SHEET_ID }}
   GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-  GKE_CLUSTER: bootiful-podcast
+  GKE_CLUSTER: joshlong-com
   GCLOUD_ZONE: us-central1-c
   GCLOUD_PROJECT: bootiful
 
