@@ -3,3 +3,4 @@ token.pickle
 .idea
 __pycache__
 appearances-site-generator/run.sh
+requirements.txt
