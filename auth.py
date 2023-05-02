@@ -9,6 +9,7 @@ and create a new OAuth 2 Client ID, choose "Desktop" application, then download 
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+
 def obtain_fresh_token(file_name: str, scopes: typing.List[str]) -> Credentials:
     flow = InstalledAppFlow.from_client_secrets_file(file_name, scopes)
     credentials = flow.run_local_server(port=0)
@@ -25,8 +26,6 @@ def authenticate(token_json_fn: str = 'token.json',
     assert any([os.path.exists(a) for a in [token_json_fn,
                                             authenticated_token_json_fn]]), \
         f'you must have either a valid {token_json_fn} or a valid {authenticated_token_json_fn}'
-
-    credentials: Credentials = None
     if not os.path.exists(authenticated_token_json_fn):
         credentials = obtain_fresh_token(token_json_fn, scopes)
         with open(authenticated_token_json_fn, 'w') as t:
