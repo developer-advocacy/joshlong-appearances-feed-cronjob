@@ -28,7 +28,7 @@ cd $ROOT_DIR
 
 
 
-python -c "import sys;print (  open('deploy/processor.yaml','r').read().replace('IMG_NAME'  ,  '$IMG_NAME'))" > final.yaml
+python -c "import sys;print (  open('processor.yaml','r').read().replace('IMG_NAME'  ,  '$IMAGE_NAME'))" > final.yaml
 kubectl apply -f final.yaml
 
 
