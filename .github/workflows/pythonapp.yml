@@ -8,6 +8,11 @@ env:
   OUTPUT_JSON : ${{ secrets.OUTPUT_JSON }}
   GIT_URI: ${{ secrets.GIT_URI }}
   SHEET_ID: ${{ secrets.SHEET_ID }}
+  GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+  GKE_CLUSTER : bootiful-podcast
+  GCLOUD_ZONE : us-central1-c
+  GCLOUD_PROJECT : bootiful
+
 
 
 on:
@@ -23,6 +28,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER  }}'
+          location: '${{ env.GCLOUD_ZONE }}'
+
+      - run: |
+          gcloud config set project $GCLOUD_PROJECT 
+          gcloud --quiet auth configure-docker
+          kubectl get pods
 
       - name: Build and Deploy the Appearances Processor to Kubernetes
         run: ./deploy/deploy.sh
