@@ -1,5 +1,4 @@
 #!/bin/bash
 set -e
 
-
-pipenv run python main.py
+python hello.py
