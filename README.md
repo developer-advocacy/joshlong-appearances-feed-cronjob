@@ -4,7 +4,12 @@ This takes the information from my Google Docs spreadsheet and dumps it into a `
 
 ## Getting a New Token
 
-The application uses a token from Google Cloud to talk to the spreadsheet. You need to go to https://console.cloud.google.com/apis/credentials?project=<YOUR_PROJECT> and create a new OAuth 2 Client ID, choose "Desktop" application, then download the resulting .json file
+The application uses a token from Google Cloud to talk to the spreadsheet. You need to go to https://console.cloud.google.com/apis/credentials?project=<YOUR_PROJECT> and create a new OAuth 2 Client ID, choose "Desktop" application, then download the resulting .json file. 
+
+Put the file somewhere safe and make sure that the `CREDENTIALS_JSON_FN` file points to it. If you're starting the program from scratch you'll need to authenticate and generate authenticated credentials, whose contents will live at the file path indicated by the environemtn variable 
+`AUTHENTICATED_CREDENTIALS_JSON_FN`. Run the program locally, making sure that you've got no file stored at `AUTHENTICATED_CREDENTIALS_JSON_FN`. Delete the contents there. When you run the program locally, it'll open up a browser, prompting you to confirm access to Google. It'll then dump the authenticated credentials into the file indicated by 
+`AUTHENTICATED_CREDENTIALS_JSON_FN`. Take the contents of both files - `CREDENTIALS_JSON_FN` and `AUTHENTICATED_CREDENTIALS_JSON_FN` - and store them in environment variables for the program in Github Actions, `CREDENTIALS_JSON` and `AUTHENTICATED_CREDENTIALS_JSON`  respectively.
+
 
 
 
