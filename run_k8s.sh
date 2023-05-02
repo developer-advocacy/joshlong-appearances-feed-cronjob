@@ -2,4 +2,4 @@
 set -e
 
 
-pipenv run python main.py
+python3 hello.py

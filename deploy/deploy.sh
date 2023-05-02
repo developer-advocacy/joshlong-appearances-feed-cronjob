@@ -16,10 +16,15 @@ echo "IMAGE_TAG=$IMAGE_TAG"
 
 cd $ROOT_DIR/..
 
-docker rmi $(docker images -a -q)
-pack build -B heroku/buildpacks:18 $APP_NAME
+#docker rmi $(docker images -a -q)
+python3 -m pip freeze > requirements.txt
+
+pack build -B heroku/builder:22 $APP_NAME
 
 image_id=$(docker images -q $APP_NAME)
+echo "the image is is ${image_id}"
+docker run $image_id
+exit 0
 docker tag "${image_id}" $IMAGE_NAME
 docker push $IMAGE_NAME
 echo "pushing ${image_id} to $IMAGE_NAME "
