@@ -25,6 +25,15 @@ docker push $IMAGE_NAME
 echo "pushing ${IMAGE_ID} to $IMAGE_NAME "
 echo "tagging ${GCR_IMAGE_NAME}"
 cd $ROOT_DIR
+
+
+
+python -c "import sys;print (  open('processor.yaml','r').read().replace('IMG_NAME'  ,  '$IMG_NAME'))" > final.yaml
+kubectl apply -f final.yaml
+
+
+
+
 #APP_YAML=${ROOT_DIR}/deploy/processor.yaml
 #APP_SERVICE_YAML=${ROOT_DIR}/deploy/processor-service.yaml
 #rm -rf $SECRETS_FN

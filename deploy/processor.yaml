@@ -10,6 +10,6 @@ spec:
         spec:
           containers:
           - name: appearances-processor-container
-            image:
-            imagePullPolicy: IfNotPresent
+            image: IMG_NAME
+            imagePullPolicy: Always
           restartPolicy: OnFailure
