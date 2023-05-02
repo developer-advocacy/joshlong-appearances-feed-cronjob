@@ -15,13 +15,7 @@ echo "IMAGE_NAME=$IMAGE_NAME"
 echo "IMAGE_TAG=$IMAGE_TAG"
 
 cd $ROOT_DIR/..
-#
-#python -m pip install --upgrade pip
-#pip install pipenv
-#pipenv install
-#pipenv run
-#pip freeze > requirements.txt
-#cat requirements.txt
+
 pack build -B heroku/builder:22 $APP_NAME
 IMAGE_ID=$(docker images -q $APP_NAME)
 echo "  $IMAGE_NAME :: $IMAGE_ID "

@@ -10,7 +10,11 @@ Put the file somewhere safe and make sure that the `CREDENTIALS_JSON_FN` file po
 `AUTHENTICATED_CREDENTIALS_JSON_FN`. Run the program locally, making sure that you've got no file stored at `AUTHENTICATED_CREDENTIALS_JSON_FN`. Delete the contents there. When you run the program locally, it'll open up a browser, prompting you to confirm access to Google. It'll then dump the authenticated credentials into the file indicated by 
 `AUTHENTICATED_CREDENTIALS_JSON_FN`. Take the contents of both files - `CREDENTIALS_JSON_FN` and `AUTHENTICATED_CREDENTIALS_JSON_FN` - and store them in environment variables for the program in Github Actions, `CREDENTIALS_JSON` and `AUTHENTICATED_CREDENTIALS_JSON`  respectively, as Base64 encoded text.
 
+## Dependencies 
 
+The buildpack requires `requirements.txt`. It's easier to generate it in the build, locally, rather than trying to get it working 
+in Github Actions. Use this command: `pip freeze > requirements.txt` and then don't forget to `git commit ` and `git push`. If you change `Pipfile`, make sure to 
+rerun this command. You might also want to delete `Pipfile.lock` and then run `pipenv install`, too. 
 
 
 ## Building 
