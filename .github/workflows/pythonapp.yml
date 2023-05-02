@@ -45,5 +45,8 @@ jobs:
           kubectl get pods
 
       - name: Build and Deploy the Appearances Processor to Kubernetes
-        run: ./deploy/deploy.sh
+        run: |
+          cd $GITHUB_WORKSPACE
+          (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.29.0/pack-v0.29.0-linux.tgz" | sudo tar -C  $GITHUB_WORKSPACE/bin/ --no-same-owner -xzv pack)
+          ./deploy/deploy.sh
 
