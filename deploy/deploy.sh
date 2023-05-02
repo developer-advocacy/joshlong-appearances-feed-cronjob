@@ -21,6 +21,7 @@ cd $ROOT_DIR/..
 #pipenv install
 #pipenv run
 pip freeze > requirements.txt
+cat requirements.txt
 pack build -B heroku/builder:22 $APP_NAME
 IMAGE_ID=$(docker images -q $APP_NAME)
 echo "  $IMAGE_NAME :: $IMAGE_ID "

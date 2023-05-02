@@ -1,17 +1,17 @@
 name: Appearances Feed Processor
 
 env:
-  GH_PAT:  ${{ secrets.GH_PAT }}
-  GIT_USERNAME  : ${{ secrets.GIT_USERNAME  }}
+  GH_PAT: ${{ secrets.GH_PAT }}
+  GIT_USERNAME: ${{ secrets.GIT_USERNAME  }}
   AUTHENTICATED_CREDENTIALS_JSON: ${{ secrets.AUTHENTICATED_CREDENTIALS_JSON }}
   CREDENTIALS_JSON: ${{ secrets.CREDENTIALS_JSON }}
-  OUTPUT_JSON : ${{ secrets.OUTPUT_JSON }}
+  OUTPUT_JSON: ${{ secrets.OUTPUT_JSON }}
   GIT_URI: ${{ secrets.GIT_URI }}
   SHEET_ID: ${{ secrets.SHEET_ID }}
   GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-  GKE_CLUSTER : bootiful-podcast
-  GCLOUD_ZONE : us-central1-c
-  GCLOUD_PROJECT : bootiful
+  GKE_CLUSTER: bootiful-podcast
+  GCLOUD_ZONE: us-central1-c
+  GCLOUD_PROJECT: bootiful
 
 
 
@@ -28,6 +28,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: "Setup PATH"
+        run: |
+          P="${GITHUB_WORKSPACE}/bin"
+          mkdir -p $P
+          echo "${P}" >> $GITHUB_PATH
 
       - uses: 'google-github-actions/auth@v0'
         with:
