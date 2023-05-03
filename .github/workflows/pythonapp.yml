@@ -13,8 +13,6 @@ env:
   GCLOUD_ZONE: us-central1-c
   GCLOUD_PROJECT: bootiful
 
-
-
 on:
   push:
     branches: [ master ]
