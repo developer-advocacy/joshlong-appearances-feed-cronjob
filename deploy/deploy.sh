@@ -40,8 +40,8 @@ export GIT_CLONE_DIR=$OUTPUT/clone
 export OUTPUT_JSON_FN=$OUTPUT/appearances.json
 
 cat <<EOF >${SECRETS_FN}
-BLOG_INDEX_REBUILD_KEY=${BLOG_INDEX_REBUILD_KEY}
-BLOG_INDEX_REBUILD_KEY=${BLOG_INDEX_REBUILD_KEY}
+A=hello A
+B=HIIIIIB
 EOF
-kubectl apply -f $SECRETS_FN
+kubectl create secret generic $SECRETS --from-file=${SECRETS_FN}
 kubectl apply -f final.yaml
