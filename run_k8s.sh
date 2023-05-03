@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
-
+#
+# this is the entry point within the container. it's what
+# actually starts up the process. it has access to the
+# environment furnished by the secrets
+#
 # TODO we need the following four variables passed in from the CI environment:
 # TODO AUTHENTICATED_CREDENTIALS_JSON, CREDENTIALS_JSON, SHEET_ID
 ##

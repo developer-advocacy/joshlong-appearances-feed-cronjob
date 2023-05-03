@@ -40,11 +40,12 @@ export GIT_CLONE_DIR=$OUTPUT/clone
 export OUTPUT_JSON_FN=$OUTPUT/appearances.json
 
 cat <<EOF >${SECRETS_FN}
-A=hello A
-B=HIIIIIB
+AUTHENTICATED_CREDENTIALS_JSON=${AUTHENTICATED_CREDENTIALS_JSON}
+SHEET_ID=${SHEET_ID}
+CREDENTIALS_JSON=${CREDENTIALS_JSON}
 EOF
 cat $SECRETS_FN
-kubectl delete secrets/$SECRETS ||echo "could not delete the secrets for $SECRETS "
+kubectl delete secrets/$SECRETS || echo "could not delete the secrets for $SECRETS "
 kubectl create secret generic $SECRETS --from-env-file $SECRETS_FN
 echo created secrets
 kubectl apply -f final.yaml
