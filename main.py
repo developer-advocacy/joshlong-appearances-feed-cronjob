@@ -60,7 +60,8 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
     custom_parsers = {'is_public': bool_converter, 'confirmed': bool_converter}
     cols = [a.strip() for a in
             ['event', 'type', 'start_date', 'end_date', 'notes', 'time', 'location', 'opportunity_number',
-             'subject_content', 'approved', 'is_public', 'marketing_blurb', 'speaking_engagement', 'location_address', 'contact', 'eyeballs']]
+             'subject_content', 'approved', 'is_public', 'marketing_blurb', 'speaking_engagement', 'location_address',
+             'contact', 'eyeballs']]
     for row in values[1:]:
         ctr = 0
         d = {}
@@ -81,11 +82,11 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
 
 def main():
 
-    for k in os.environ.keys() :
-        print (k, '=', os.environ.get(k))
+    for k in os.environ.keys():
+        print(k, '=', os.environ.get(k))
 
     scopes: list = ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/calendar']
-    output_json_fn = os.path.expanduser(os.environ['OUTPUT_JSON_FN'])
+    output_json_fn: str = os.path.expanduser(os.environ['OUTPUT_JSON_FN'])
     token_json_fn: str = os.path.expanduser(os.environ['CREDENTIALS_JSON_FN'])
     authenticated_token_json_fn: str = os.path.expanduser(os.environ['AUTHENTICATED_CREDENTIALS_JSON_FN'])
     credentials = auth.authenticate(token_json_fn, authenticated_token_json_fn, scopes)

@@ -19,7 +19,7 @@ cd $ROOT_DIR/..
 pack build -B heroku/builder:22 $APP_NAME
 IMAGE_ID=$(docker images -q $APP_NAME)
 echo " $IMAGE_NAME :: $IMAGE_ID "
-docker run $IMAGE_ID
+#docker run $IMAGE_ID
 docker tag "${IMAGE_ID}" $IMAGE_NAME
 docker push $IMAGE_NAME
 echo "pushing ${IMAGE_ID} to $IMAGE_NAME "
@@ -43,5 +43,7 @@ cat <<EOF >${SECRETS_FN}
 A=hello A
 B=HIIIIIB
 EOF
+cat $SECRETS_FN
 kubectl create secret generic $SECRETS --from-file=${SECRETS_FN}
+echo created secrets
 kubectl apply -f final.yaml
