@@ -45,6 +45,6 @@ B=HIIIIIB
 EOF
 cat $SECRETS_FN
 kubectl delete secrets/$SECRETS ||echo "could not delete the secrets for $SECRETS "
-kubectl create secret generic $SECRETS --from-file=${SECRETS_FN}
+kubectl create secret generic $SECRETS --from-env-file $SECRETS_FN
 echo created secrets
 kubectl apply -f final.yaml
