@@ -14,5 +14,5 @@ spec:
             imagePullPolicy: Always
             envFrom:
               - secretRef:
-                name: appearances-processor-secrets
+                  name: appearances-processor-secrets
           restartPolicy: OnFailure
