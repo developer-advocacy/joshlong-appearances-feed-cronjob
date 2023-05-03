@@ -19,7 +19,6 @@ cd $ROOT_DIR/..
 pack build -B heroku/builder:22 $APP_NAME
 IMAGE_ID=$(docker images -q $APP_NAME)
 echo " $IMAGE_NAME :: $IMAGE_ID "
-#docker run $IMAGE_ID
 docker tag "${IMAGE_ID}" $IMAGE_NAME
 docker push $IMAGE_NAME
 echo "pushing ${IMAGE_ID} to $IMAGE_NAME "

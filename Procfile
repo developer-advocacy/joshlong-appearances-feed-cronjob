@@ -1,1 +1,1 @@
-web: ./run_k8s.sh
+web: ./run.sh
