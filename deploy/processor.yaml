@@ -3,7 +3,8 @@ kind: CronJob
 metadata:
   name: appearances-processor-cronjob
 spec:
-  schedule: "* * * * *"
+  # runs every hour on the hour
+  schedule: "0 * * * *"
   jobTemplate:
     spec:
       template:

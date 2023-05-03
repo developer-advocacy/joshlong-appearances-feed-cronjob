@@ -1,4 +1,4 @@
-name: Appearances Feed Processor
+name: Appearances Feed Processor Kubernetes CronJob
 
 env:
   GH_PAT: ${{ secrets.GH_PAT }}
