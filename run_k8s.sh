@@ -40,9 +40,6 @@ ls -la $OUTPUT_JSON_FN
 git add *
 git commit -am "updated $FN @ $(date)" && git push  || echo "It was not possible to commit the results. Perhaps nothing changed?"
 git config --global user.name "$EXISTING_GIT_USERNAME"
-
-
-
 #
 #sleep 3m  # give the cached http urls in github time to invalidate their caches so when we get to the next step, were not pulling down cached URIs
 #
