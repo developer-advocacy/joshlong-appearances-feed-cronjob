@@ -49,3 +49,5 @@ kubectl delete secrets/$SECRETS || echo "could not delete the secrets for $SECRE
 kubectl create secret generic $SECRETS --from-env-file $SECRETS_FN
 echo created secrets
 kubectl apply -f final.yaml
+## lets kick it off at least the first time and then it'll just run every hour.
+kubectl create job --from=cronjob/${APP_NAME}-cronjob  ${APP_NAME}-cronjob-run-$RANDOM
