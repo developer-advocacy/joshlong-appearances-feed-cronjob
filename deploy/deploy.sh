@@ -38,4 +38,4 @@ kubectl delete -f deploy/processor.yaml  || echo "could not delete existing depl
 kubectl apply  -f deploy/processor.yaml
 
 # lets kick it off at least the first time and then it'll just run every hour.
-kubectl create job --from=cronjob/${APP_NAME}-cronjob  ${APP_NAME}-cronjob-run-$RANDOM
+kubectl create job --from=cronjob/${APP_NAME}   ${APP_NAME}-cronjob-run-$RANDOM
