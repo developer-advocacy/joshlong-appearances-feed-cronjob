@@ -34,7 +34,7 @@ kubectl delete secrets/$SECRETS || echo "could not delete the secrets for $SECRE
 kubectl create secret generic $SECRETS --from-env-file $SECRETS_FN
 echo created secrets
 
-kubectl delete -f deploy/processor.yaml
+kubectl delete -f deploy/processor.yaml  || echo "could not delete existing deployment as there is probably nothing to delete in the first place."
 kubectl apply  -f deploy/processor.yaml
 
 # lets kick it off at least the first time and then it'll just run every hour.
