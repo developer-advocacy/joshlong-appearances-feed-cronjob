@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
 
       - name: "Setup PATH"
         run: |
@@ -53,9 +54,7 @@ jobs:
           kubectl get ns/$NS_NAME || kubectl create ns $NS_NAME 
           kubectl config set-context --current --namespace=$NS_NAME
           kubectl config view --minify | grep namespace: && echo "found the namespace.."
-
-          cd $GITHUB_WORKSPACE
           mkdir -p $GITHUB_WORKSPACE/bin/
           (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.29.0/pack-v0.29.0-linux.tgz" | sudo tar -C  $GITHUB_WORKSPACE/bin/ --no-same-owner -xzv pack)
-          ./deploy/deploy.sh
+          $GITHUB_WORKSPACE/deploy/deploy.sh
 
