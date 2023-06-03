@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: appearances-processor-cronjob
+  name: joshlong-appearances-feed-cronjob
 spec:
   # runs every hour on the hour
   schedule: "0 * * * *"
@@ -10,10 +10,10 @@ spec:
       template:
         spec:
           containers:
-          - name: appearances-processor-container
-            image: IMG_NAME
+          - name: joshlong-appearances-feed-cronjob
+            image: gcr.io/pgtm-jlong/joshlong-appearances-feed-cronjob
             imagePullPolicy: Always
             envFrom:
               - secretRef:
-                  name: appearances-processor-secrets
+                  name: joshlong-appearances-feed-cronjob-secrets
           restartPolicy: OnFailure
