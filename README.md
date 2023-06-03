@@ -2,6 +2,7 @@
 
 This takes the information from my Google Docs spreadsheet and dumps it into a `.json` file that can be used to synchronize other services with my public appearances (virtual or otherwise). 
 
+
 ## Getting a New Token
 
 The application uses a token from Google Cloud to talk to the spreadsheet. You need to go to https://console.cloud.google.com/apis/credentials?project=<YOUR_PROJECT> and create a new OAuth 2 Client ID, choose "Desktop" application, then download the resulting .json file. 

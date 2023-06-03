@@ -6,9 +6,11 @@ cd $GITHUB_WORKSPACE
 echo "starting the build in $(pwd) "
 APP_NAME=joshlong-appearances-feed-cronjob
 SECRETS=${APP_NAME}-secrets
-IMAGE_NAME=gcr.io/${GCLOUD_PROJECT}/${APP_NAME}
+PROJECT_ID=${GCLOUD_PROJECT}
+IMAGE_NAME=gcr.io/${PROJECT_ID}/${APP_NAME}
 echo "IMAGE_NAME=$IMAGE_NAME"
-pack build -B heroku/builder:22 $IMAGE_NAME
+pack build  $IMAGE_NAME  -B heroku/builder:22
+docker push $IMAGE_NAME
 #python -c "import sys;print( open('processor.yaml','r').read().replace( 'IMG_NAME', '$IMAGE_NAME' ))" > final.yaml
 
 SECRETS_FN=secrets.yaml
