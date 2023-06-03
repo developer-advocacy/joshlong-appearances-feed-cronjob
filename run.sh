@@ -14,8 +14,8 @@ export AUTHENTICATED_CREDENTIALS_JSON_FN=$HOME/authenticated-credentials.json
 export OUTPUT=$HOME/out
 export GIT_CLONE_DIR=$OUTPUT/clone
 export OUTPUT_JSON_FN=$OUTPUT/appearances.json
-echo "${AUTHENTICATED_CREDENTIALS_JSON}" | base64 -d >$AUTHENTICATED_CREDENTIALS_JSON_FN
 echo "${CREDENTIALS_JSON}" | base64 -d >$CREDENTIALS_JSON_FN
+echo "${AUTHENTICATED_CREDENTIALS_JSON}" | base64 -d >$AUTHENTICATED_CREDENTIALS_JSON_FN
 rm -rf $OUTPUT
 mkdir -p $OUTPUT
 python main.py
@@ -23,7 +23,7 @@ git || echo "git needs to be installed"
 cat $OUTPUT_JSON_FN
 export EXISTING_GIT_USERNAME=$(git config --global user.name)
 git config --global user.email "josh@joshlong.com"
-git config --global user.name "Appearances Bot"
+git config --global user.name "JoshLong.com Appearances Feed Cronjob"
 mkdir -p $GIT_CLONE_DIR
 git clone https://${GIT_USERNAME}:${GH_PAT}@github.com/joshlong/joshlong.github.io-content.git $GIT_CLONE_DIR
 cd $GIT_CLONE_DIR

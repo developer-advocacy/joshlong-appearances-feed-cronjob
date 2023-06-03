@@ -5,11 +5,25 @@ This takes the information from my Google Docs spreadsheet and dumps it into a `
 
 ## Getting a New Token
 
-The application uses a token from Google Cloud to talk to the spreadsheet. You need to go to https://console.cloud.google.com/apis/credentials?project=<YOUR_PROJECT> and create a new OAuth 2 Client ID, choose "Desktop" application, then download the resulting .json file. 
+The application uses a token from Google Cloud to talk to the spreadsheet. You need to go to https://console.cloud.google.com/apis/credentials?project=<YOUR_PROJECT> and create a new OAuth 2 Client ID, choose "Desktop" application. 
 
-Put the file somewhere safe and make sure that the `CREDENTIALS_JSON_FN` file points to it. If you're starting the program from scratch you'll need to authenticate and generate authenticated credentials, whose contents will live at the file path indicated by the environemtn variable 
-`AUTHENTICATED_CREDENTIALS_JSON_FN`. Run the program locally, making sure that you've got no file stored at `AUTHENTICATED_CREDENTIALS_JSON_FN`. Delete the contents there. When you run the program locally, it'll open up a browser, prompting you to confirm access to Google. It'll then dump the authenticated credentials into the file indicated by 
-`AUTHENTICATED_CREDENTIALS_JSON_FN`. Take the contents of both files - `CREDENTIALS_JSON_FN` and `AUTHENTICATED_CREDENTIALS_JSON_FN` - and store them in environment variables for the program in Github Actions, `CREDENTIALS_JSON` and `AUTHENTICATED_CREDENTIALS_JSON`  respectively, as Base64 encoded text.
+This program requires an Oauth client that is `Public`. You may specify that it's `Testing`, in which case it'll be limited to test users. Make sure to add yourself (in my case, `josh@joshlong.com`). 
+
+Download the resulting `.json` file. 
+
+Put the file somewhere safe and make sure that the `CREDENTIALS_JSON_FN` file points to it. If you're starting the 
+program from scratch you'll need to authenticate and generate authenticated credentials, whose contents will live at the file path indicated by the environment variable `AUTHENTICATED_CREDENTIALS_JSON_FN`. Run the program locally, making sure that you've got no file stored at `AUTHENTICATED_CREDENTIALS_JSON_FN`. Delete the contents there. When you run the program locally, it'll open up a browser, prompting you to confirm access to Google. It'll then dump the authenticated credentials into the file indicated by `AUTHENTICATED_CREDENTIALS_JSON_FN`. Take the contents of both files - `CREDENTIALS_JSON_FN` and `AUTHENTICATED_CREDENTIALS_JSON_FN` - and store them in environment variables for the program in Github Actions, `CREDENTIALS_JSON` and `AUTHENTICATED_CREDENTIALS_JSON`  respectively, as Base64 encoded text.
+
+## Running the program
+
+Configure the OAuth consent 
+screen for your project. Download the `.json` file and put it somewhere on the file system. Whern you run the 
+program, make sure that `CREDENTIALS_JSON_FN` points to this file. Run it on your local machine and it'll redirect 
+you to a Google login and ask you to confirm that you want to give the client these permissions. When it's done, 
+it'll dump the authenticated credential in whatever path you put in `AUTHENTICATED_CREDENTIALS_JSON_FN`. Keep both `.
+json` files and make them Github Secrets for the environment variables `CREDENTIALS_JSON` and 
+`AUTHENTICATED_CREDENTIALS_JSON`.
+
 
 ## Dependencies 
 

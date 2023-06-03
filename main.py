@@ -6,6 +6,10 @@ import auth
 import google.sheets
 from google import sheets
 
+'''
+this program requires the following environment variables be set before running it locally:
+    - 
+'''
 
 class Appearance(object):
 

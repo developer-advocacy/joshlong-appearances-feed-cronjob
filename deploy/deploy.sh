@@ -11,7 +11,6 @@ IMAGE_NAME=gcr.io/${PROJECT_ID}/${APP_NAME}
 echo "IMAGE_NAME=$IMAGE_NAME"
 pack build  $IMAGE_NAME  -B heroku/builder:22
 docker push $IMAGE_NAME
-#python -c "import sys;print( open('processor.yaml','r').read().replace( 'IMG_NAME', '$IMAGE_NAME' ))" > final.yaml
 
 SECRETS_FN=secrets.yaml
 SECRETS=${APP_NAME}-secrets
@@ -40,4 +39,4 @@ kubectl delete -f deploy/processor.yaml  || echo "could not delete existing depl
 kubectl apply  -f deploy/processor.yaml
 
 # lets kick it off at least the first time and then it'll just run every hour.
-kubectl create job --from=cronjob/${APP_NAME}   ${APP_NAME}-cronjob-run-$RANDOM
+kubectl create job --from=cronjob/${APP_NAME} ${APP_NAME}-cronjob-run-$RANDOM
