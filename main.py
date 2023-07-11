@@ -6,10 +6,6 @@ import auth
 import google.sheets
 from google import sheets
 
-'''
-this program requires the following environment variables be set before running it locally:
-    - 
-'''
 
 class Appearance(object):
 
@@ -85,7 +81,6 @@ def read_appearances_from_google_sheet(sheet: google.sheets.GoogleSheet, tab: st
 
 
 def main():
-
     for k in os.environ.keys():
         print(k, '=', os.environ.get(k))
 
