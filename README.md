@@ -24,7 +24,6 @@ it'll dump the authenticated credential in whatever path you put in `AUTHENTICAT
 json` files and make them Github Secrets for the environment variables `CREDENTIALS_JSON` and 
 `AUTHENTICATED_CREDENTIALS_JSON`.
 
-
 ## Dependencies 
 
 The buildpack requires `requirements.txt`. It's easier to generate it in the build, locally, rather than trying to get it working 
